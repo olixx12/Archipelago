@@ -1,0 +1,162 @@
+{
+    "Tools": {
+        "Progressive Pickaxe": {
+            "id": 249,
+            "count": 8
+        },
+        "Progressive Shovel": {
+            "id": 250,
+            "count": 5
+        },
+        "Progressive Sword": {
+            "id": 251,
+            "count": 8
+        },
+        "Progressive Bow": {
+            "id": 252,
+            "count": 8
+        },
+        "Progressive Amulet": {
+            "id": 253,
+            "count": 8
+        },
+        "Progressive Wallet": {
+            "id": 254,
+            "count": 8
+        },
+        "Progressive Gloves": {
+            "id": 255,
+            "count": 8
+        },
+        "Progressive Book": {
+            "id": 255,
+            "count": 8
+        },
+        "Progressive Backpack": {
+            "id": 256,
+            "count": 5
+        },
+        "Progressive Fire Rod": {
+            "id": 257,
+            "count": 2
+        },
+        "Progressive Thunder Rod": {
+            "id": 258,
+            "count": 2
+        },
+        "Progressive Ice Rod": {
+            "id": 259,
+            "count": 2
+        },
+        "Progressive Necro Rod": {
+            "id": 260,
+            "count": 2
+        },
+        "Hammer": {
+            "id": 261,
+            "count": 1
+        },
+        "Fishing Rod": {
+            "id": 262,
+            "count": 1
+        },
+        "Obliterator": {
+            "id": 263,
+            "count": 1
+        }
+    },
+    "Seals": {
+        "Ancient Seal": 264,
+        "Fire Seal": 265,
+        "Frozen Galaxy Seal": 266,
+        "Skull Seal": 267,
+        "Ancient Galaxy Seal": 268,
+        "Fire Galaxy Seal": 269,
+        "Frozen Seal": 270,
+        "Skull Galaxy Seal": 271,
+        "Museum Seal": 272
+    },
+    "Relics": {
+        "Nerdy Glasses": 273,
+        "Lantern": 274,
+        "Fairy Aura": 275,
+        "Shield": 276,
+        "Fish Net": 277,
+        "Top Hat": 278,
+        "Skull Key": 279,
+        "Quiver": 280,
+        "Magic Scepter": 281,
+        "Merchant's Medallion": 282,
+        "Pink Bow": 283,
+        "Skeleton Mask": 284,
+        "Vampyr Wings": 285,
+        "Holy Relic": 286,
+        "Lunar Medaillion": 287
+    },
+    "Skills": {
+        "Industry": 300,
+        "Carpentry": 301,
+        "Sewing": 302,
+        "Masonry": 303,
+        "Craftsmanship": 304,
+        "Textiles": 305,
+        "Machinery": 306,
+        "Manufacturing": 307,
+        "Smelting": 308,
+        "Jewelry": 309,
+        "Drilling": 310,
+        "Railroads": 311,
+        "Physics": 312,
+        "Automation": 313,
+        "Engineering": 314,
+        "Lasers": 315,
+        "Economy": 316,
+        "Storage": 317,
+        "Trade": 318,
+        "Gambling": 319,
+        "Banking": 320,
+        "Bargain": 321,
+        "Optics": 322,
+        "Management": 323,
+        "Capitalism": 324,
+        "Supply": 325,
+        "Architecture": 326,
+        "Treasury": 327,
+        "Artistry": 328,
+        "Autorepair": 329,
+        "Colonization": 330,
+        "Logistics": 331,
+        "Foraging": 332,
+        "Gathering": 333,
+        "Hunting": 334,
+        "Farming": 335,
+        "Fishing": 336,
+        "Ballistics": 337,
+        "Pet": 338,
+        "Mining": 339,
+        "Cooking": 340,
+        "Looting": 341,
+        "Geology": 342,
+        "Calciverous": 343,
+        "Gluttony": 344,
+        "Prospecting": 345,
+        "Prowess": 346,
+        "Deposit": 347,
+        "Magic": 348,
+        "Alchemy": 349,
+        "Combat": 350,
+        "Inscription": 351,
+        "Evasion":352,
+        "Renewal": 353,
+        "Thaumaturgy": 354,
+        "Reagency": 355,
+        "Spellbind": 356,
+        "Destruction": 357,
+        "Faith": 358,
+        "Transmutation": 359,
+        "Spirituality": 360,
+        "Conjuration": 361,
+        "Summoning": 362,
+        "Astrology": 363
+    }
+}   

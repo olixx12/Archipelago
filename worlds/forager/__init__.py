@@ -1,7 +1,16 @@
 from worlds.AutoWorld import World, WebWorld
 from BaseClasses import ItemClassification as IClass
+from worlds.LauncherComponents import Component, components, icon_paths, launch as launch_component, Type
 from .Regions import load_tables, load_regions
 from.Items import ForagerItem
+
+def launch_client():
+    from .Client import launch
+    launch_component(launch, name="ForagerClient")
+
+
+components.append(Component("Forager Client", func=launch_client,
+                            component_type=Type.CLIENT))
 
 #Class ForagerWebWorld(Webworld): //Major
 class ForagerWorld(World):

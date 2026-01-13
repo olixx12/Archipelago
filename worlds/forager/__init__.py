@@ -1,7 +1,7 @@
 from worlds.AutoWorld import World, WebWorld
 from BaseClasses import ItemClassification as IClass
 from worlds.LauncherComponents import Component, components, icon_paths, launch as launch_component, Type
-from .Regions import load_tables, load_regions
+from .Regions import load_tables, load_regions, ForagerLocation
 from.Items import ForagerItem
 
 def launch_client():
@@ -28,6 +28,17 @@ class ForagerWorld(World):
     
     def create_regions(self):
         regions = load_regions(self.player,self.multiworld)
-        self.multiworld.regions.extend(regions)
+        for location,address in self.location_name_to_id.items():
+            regions["Menu"].locations.append(ForagerLocation(self.player,location,address, parent = regions["Menu"])) #Placeholder
+        self.multiworld.regions.extend(list(regions.values()))
+    
+    def create_items(self):
+        #Massive placeholder
+        locations = len(self.location_name_to_id)
+        items = 0
+        for item,address in self.item_name_to_id.items():
+            if(items < locations):
+                self.multiworld.itempool.append(ForagerItem(item,IClass.progression,address,self.player))
+                items += 1
     
     

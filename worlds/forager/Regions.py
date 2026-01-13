@@ -36,7 +36,7 @@ def load_regions(player : int, multiworld : MultiWorld):
                                   lambda state : state.has("Astrology",player))
     regions["Void Steel"].connect(regions["Nuclear"], "Nuclear Tier", 
                                   lambda state : state.has("Physics", player))
-    return regions.values()
+    return regions
 
 
 def load_tables(item_name_to_id,location_name_to_id):
@@ -57,9 +57,13 @@ def load_tables(item_name_to_id,location_name_to_id):
             for i in range(2,category["last_id"] - category["first_id"] + 2):
                 location_name_to_id[f"Level {i}"] = (category["first_id"]+i) - 2
         else:
-            item_name_to_id.update(category)
+            for location, id in category.items():
+                location_name_to_id[location] = id
     #Applying the offset to both table
     for item_name,item_id in item_name_to_id.items():
         item_name_to_id[item_name] = item_id + offset
     for location_name,location_id in location_name_to_id.items():
         item_name_to_id[location_name] = location_id + offset
+
+class ForagerLocation(Location):
+    game = "Forager"

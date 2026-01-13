@@ -158,5 +158,8 @@
         "Conjuration": 361,
         "Summoning": 362,
         "Astrology": 363
+    },
+    "Misc" : {
+        "Nothing!" : 364
     }
 }   

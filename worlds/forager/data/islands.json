@@ -1,0 +1,62 @@
+{
+    "Lands": {
+        "Grass": {
+            "Fairy Fountain": 201,
+            "Rainbow Pond": 202,
+            "Four Pillars": 203,
+            "Foraging Obelisk": 204,
+            "Druid's Treehouse": 205,
+            "Small Island": 206,
+            "Giant Beets": 207,
+            "Museum": 208
+        },
+        "Desert": {
+            "Ancient Tomb": 209,
+            "Mining Obelisk": 210,
+            "Princess": 211,
+            "Flower Island": 212,
+            "Eye Statue": 213,
+            "Moon Sword Obelisk": 214,
+            "Constellation Tower": 215,
+            "Old Man": 216,
+            "Watchers": 217,
+            "Battery": 218
+        },
+        "Winter": {
+            "Crystal Cave": 219,
+            "Froze Galaxy": 220,
+            "Crafting Obelisk": 221,
+            "Fox Man": 222,
+            "Mysterious Princess Statue": 223,
+            "Magic Stag Land": 224,
+            "Ice Wizard Land": 225,
+            "Giant Crystal": 226,
+            "Ghost Island": 227,
+            "Frozen Chest Land": 228
+        },
+        "Graveyard": {
+            "Skull Maze": 229,
+            "Skull Tower": 230,
+            "Woodcutter Obelisk": 231,
+            "Spike Trap Island": 232,
+            "Skeleton Island": 233,
+            "Bone Pile Island": 234,
+            "Jester Island": 235,
+            "Colored Pedestals": 236,
+            "Skull Braziers": 237,
+            "3 Bells": 238
+        },
+        "Fire": {
+            "Fire Temple": 239,
+            "Fire Galaxy": 240,
+            "Combat Obelisk": 241,
+            "Wizard's Tower": 242,
+            "Shrine Island": 243,
+            "Numbers Puzzle": 244,
+            "Lights Out Puzzle": 245,
+            "Engineer's Factory": 246,
+            "Dark Shrine": 247,
+            "Fire Chests": 248
+        }
+    }
+}   

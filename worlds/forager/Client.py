@@ -68,6 +68,7 @@ class ForagerContext(CommonContext):
         self.server_msgs.append(encode([{"cmd": "ReceivedItems", "index": 0, "items": self.full_inventory}]))
 
     def on_package(self, cmd: str, args: dict):
+        super().on_package(cmd, args)  # Import to ensure Universal Tracker gets the required information it needs.
         if cmd == "Connected":
             json = args
             # This data is not needed and causes the game to freeze for long periods of time in large asyncs.

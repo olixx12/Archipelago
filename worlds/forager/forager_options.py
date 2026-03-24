@@ -28,5 +28,5 @@ class ForagerOptions(PerGameCommonOptions):
 
 
 forager_option_groups: list[OptionGroup] = [
-    OptionGroup("Main Forager Options", [GameMode])
+    OptionGroup("Main Forager Options", [GameMode, RequiredLevel])
 ]

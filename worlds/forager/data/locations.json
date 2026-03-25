@@ -82,8 +82,8 @@
         "Blizzard Rod": {"id": 296, "region": "Winter", "required_items": ["Upgrade 2"]},
         "Necro Rod": {"id": 297, "region": "Graveyard", "required_items": []},
         "Death Rod": {"id": 298, "region": "Graveyard", "required_items": ["Upgrade 2"]},
-        "Hammer": {"id": 299, "region": "Grass", "required_items": []},
-        "Fishing Rod": {"id": 300, "region": "Steel", "required_items": ["Sewing", "Fishing"]},
+        "Hammer": {"id": 299, "region": "Grass", "required_items": ["Craftsmanship"]},
+        "Fishing Rod": {"id": 300, "region": "Steel", "required_items": ["Industry", "Fishing"]},
         "Obliterator" : {"id": 301, "region": "Cosmic Steel", "required_items": []}
     },
     "Level": {

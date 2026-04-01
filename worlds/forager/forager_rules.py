@@ -101,9 +101,54 @@ def create_location_access_rules(world: "ForagerWorld"):
 
 
     # Add rules to the events that ensures you can only logically get the next tier if you have the previous upgrade item.
-    for tier_num in range(3, 9):
-        tier_loc: Location = world.get_location(f"Tier {tier_num}")
-        add_rule(tier_loc, lambda state, num=tier_num-1: state.has(f"Upgrade {num}", world.player))
+    for tier_num in range(1, 9):
+        # Lock Industry Upgrades
+        tier_loc: Location = world.get_location(f"Industry Tier {tier_num}")
+        if tier_num == 1:
+            add_rule(tier_loc, lambda state: state.has("Industry", world.player))
+        else:
+            add_rule(tier_loc, lambda state, num=tier_num-1: state.has(f"Industry Upgrade {num}", world.player) and
+                state.has("Industry", world.player))
+
+        # Lock Combat Upgrades
+        tier_loc: Location = world.get_location(f"Combat Tier {tier_num}")
+        if tier_num == 1:
+            add_rule(tier_loc, lambda state: state.has("Combat", world.player))
+        else:
+            add_rule(tier_loc, lambda state, num=tier_num - 1: state.has(f"Combat Upgrade {num}", world.player) and
+                state.has("Combat", world.player))
+
+        # Lock Hunting Upgrades
+        tier_loc: Location = world.get_location(f"Hunting Tier {tier_num}")
+        if tier_num == 1:
+            add_rule(tier_loc, lambda state: state.has("Hunting", world.player))
+        else:
+            add_rule(tier_loc, lambda state, num=tier_num - 1: state.has(f"Hunting Upgrade {num}", world.player) and
+                state.has("Hunting", world.player))
+
+        # Lock Jewelry Upgrades
+        tier_loc: Location = world.get_location(f"Jewelry Tier {tier_num}")
+        if tier_num == 1:
+            add_rule(tier_loc, lambda state: state.has("Jewelry", world.player))
+        else:
+            add_rule(tier_loc, lambda state, num=tier_num - 1: state.has(f"Jewelry Upgrade {num}", world.player) and
+                state.has("Jewelry", world.player))
+
+        # Lock Textiles Upgrades
+        tier_loc: Location = world.get_location(f"Textiles Tier {tier_num}")
+        if tier_num == 1:
+            add_rule(tier_loc, lambda state: state.has("Textiles", world.player))
+        else:
+            add_rule(tier_loc, lambda state, num=tier_num - 1: state.has(f"Textiles Upgrade {num}", world.player) and
+                state.has("Textiles", world.player))
+
+        # Lock Inscription Upgrades
+        tier_loc: Location = world.get_location(f"Inscription Tier {tier_num}")
+        if tier_num == 1:
+            add_rule(tier_loc, lambda state: state.has("Inscription", world.player))
+        else:
+            add_rule(tier_loc, lambda state, num=tier_num - 1: state.has(f"Inscription Upgrade {num}", world.player) and
+                state.has("Inscription", world.player))
 
 
 def deny_item_placements(world: "ForagerWorld"):

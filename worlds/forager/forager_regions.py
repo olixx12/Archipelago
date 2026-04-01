@@ -116,6 +116,16 @@ def create_locations(world: "ForagerWorld"):
 
     # Create some event items for ensuring logic handles upgrade items in order.
     grass_reg: Region = world.get_region("Grass")
-    for tier_num in range(2, 9):
-        grass_reg.add_event(f"Tier {tier_num}", f"Upgrade {tier_num}",
+    for tier_num in range(1, 9):
+        grass_reg.add_event(f"Industry Tier {tier_num}", f"Industry Upgrade {tier_num}",
             location_type=ForagerLocation, item_type=ForagerItem)
+        grass_reg.add_event(f"Combat Tier {tier_num}", f"Combat Upgrade {tier_num}",
+                            location_type=ForagerLocation, item_type=ForagerItem)
+        grass_reg.add_event(f"Hunting Tier {tier_num}", f"Hunting Upgrade {tier_num}",
+                            location_type=ForagerLocation, item_type=ForagerItem)
+        grass_reg.add_event(f"Jewelry Tier {tier_num}", f"Jewelry Upgrade {tier_num}",
+                            location_type=ForagerLocation, item_type=ForagerItem)
+        grass_reg.add_event(f"Textiles Tier {tier_num}", f"Textiles Upgrade {tier_num}",
+                            location_type=ForagerLocation, item_type=ForagerItem)
+        grass_reg.add_event(f"Inscription Tier {tier_num}", f"Inscription Upgrade {tier_num}",
+                            location_type=ForagerLocation, item_type=ForagerItem)

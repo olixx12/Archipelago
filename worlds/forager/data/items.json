@@ -100,7 +100,7 @@
     "Deposit": { "id": 347, "classification": "Progression" },
     "Magic": { "id": 348, "classification": "Progression" },
     "Alchemy": { "id": 349, "classification": "Useful" },
-    "Inscription": { "id": 350, "classification": "Useful" },
+    "Inscription": { "id": 350, "classification": "Progression" },
     "Thaumaturgy": { "id": 351, "classification": "Useful" },
     "Combat": { "id": 352, "classification": "Progression" },
     "Evasion": { "id": 353, "classification": "Useful" },

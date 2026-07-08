@@ -6,7 +6,7 @@ from copy import deepcopy
 from typing import Iterable
 from NetUtils import decode, encode, JSONtoTextParser, JSONMessagePart, NetworkItem, NetworkPlayer
 from MultiServer import Endpoint
-from CommonClient import CommonContext, gui_enabled, ClientCommandProcessor, logger, get_base_parser, server_loop
+from CommonClient import CommonContext, gui_enabled, ClientCommandProcessor, logger, get_base_parser, server_loop, ClientStatus
 import aiohttp.web
 
 DEBUG = True
@@ -123,7 +123,6 @@ class ForagerContext(CommonContext):
     
     async def locationHandler(self, request: aiohttp.web.Request) -> aiohttp.web.Response:
         requestjson = await request.json()
-        logger.info(requestjson)
         try:
             await self.check_locations(requestjson["Locations"])
         except:
@@ -135,6 +134,17 @@ class ForagerContext(CommonContext):
         """handle GET at /Items"""
         response = self.build_item_response()
         return aiohttp.web.json_response(response)
+    
+    async def datapackageHandler(self, request: aiohttp.web.Request) -> aiohttp.web.Response:
+        """handle GET at /Datapackage"""
+        """Anything in slot data or anything required on connection."""
+        response = self.build_datapackage_response()
+        return aiohttp.web.json_response(response)
+    
+    async def goalHandler(self, request: aiohttp.web.Request) -> aiohttp.web.Response:
+        """Handles POST at /Datapackage"""
+        message = [{"cmd": "StatusUpdate", "status": ClientStatus.CLIENT_GOAL}]
+        await self.send_msgs(message)
     
     def build_item_response(self):
         """
@@ -156,6 +166,27 @@ class ForagerContext(CommonContext):
             "Skills" : skills
         }
         return itemmessage
+    
+    def build_datapackage_response(self):
+        """
+        Expected return value to be like: 
+        {"Gear" : {"pickaxe" : 3, "sword" : 2}}
+        """
+        gear = {}
+        gear_ids = [17,209,215,228,238,248,258,268,278,286]
+        gear_names = ["boots","pickaxe","shovel","sword","bow","amulet","wallet","gloves","book","backpack"]
+        for loc in self.checked_locations:
+            if loc <= 286:
+                for i in range(10):
+                    if loc <= gear_ids[i]:
+                        name = gear_names[i]
+                        gear[name] = gear.get(name,0) + 1
+                        break
+        itemmessage = {
+            "Gear" : gear
+        }
+        return itemmessage
+
 
 
 

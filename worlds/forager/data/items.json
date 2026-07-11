@@ -31,24 +31,6 @@
     "Museum Seal": { "id": 274, "classification": "Filler" }
   },
 
-  "Relics": {
-    "Nerdy Glasses": { "id": 275, "classification": "Useful" },
-    "Lantern": { "id": 276, "classification": "Filler" },
-    "Fairy Aura": { "id": 277, "classification": "Filler" },
-    "Shield": { "id": 278, "classification": "Filler" },
-    "Fish Net": { "id": 279, "classification": "Useful" },
-    "Top Hat": { "id": 280, "classification": "Progression" },
-    "Skull Key": { "id": 281, "classification": "Filler" },
-    "Quiver": { "id": 282, "classification": "Progression" },
-    "Magic Scepter": { "id": 283, "classification": "Filler" },
-    "Merchant's Medallion": { "id": 284, "classification": "Useful" },
-    "Pink Bow": { "id": 285, "classification": "Useful" },
-    "Skeleton Mask": { "id": 286, "classification": "Filler" },
-    "Vampyr Wings": { "id": 287, "classification": "Filler" },
-    "Holy Relic": { "id": 288, "classification": "Filler" },
-    "Lunar Medaillion": { "id": 289, "classification": "Progression" }
-  },
-
   "Skills": {
     "Industry": { "id": 300, "classification": "Progression" },
     "Carpentry": { "id": 301, "classification": "Useful" },

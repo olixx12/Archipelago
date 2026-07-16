@@ -13,7 +13,7 @@ class GameMode(Choice):
 
 class RequiredLevel(Range):
     """
-    Choose what level is required to beat the game.
+    Choose what level is required to beat the game. (WIP)
     """
     display_name = "Required Level"
     internal_name = "required_level"

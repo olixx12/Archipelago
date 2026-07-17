@@ -34,6 +34,9 @@ class ForagerContext(CommonContext):
         self.awaiting_info = False
         self.full_inventory: list[any] = []
         self.server_msgs: list[any] = []
+        self.slot_data = {}
+        self.goal : str = "level"
+        self.goalLevel : int = 65
 
     async def server_auth(self, password_requested: bool = False):
         if password_requested and not self.password:
@@ -83,6 +86,8 @@ class ForagerContext(CommonContext):
 
                 # Only put our player info in there as we actually need it
                 json["players"] = [me]
+            self.slot_data = json["slot_data"]
+            self.goalLevel = self.slot_data["required_level"]
             if DEBUG:
                 print(json)
             self.connected_msg = encode([json])
@@ -157,7 +162,7 @@ class ForagerContext(CommonContext):
         for item in self.items_received:
             if(item[0] >= 300 and item[0] < 364):
                 skills[item[0] - 300] = 1
-            elif(item[0] >= 249 and item[0] <= 260):
+            elif(item[0] >= 249 and item[0] <= 265):
                 name = self.item_names["Forager"][item[0]]
                 name = name[12:].lower()
                 gear[name] = gear.get(name,0) + 1
@@ -170,9 +175,10 @@ class ForagerContext(CommonContext):
     def build_datapackage_response(self):
         """
         Expected return value to be like: 
-        {"Gear" : {"pickaxe" : 3, "sword" : 2}}
+        {"Gear" : {"pickaxe" : 3, "sword" : 2}, "Goal" : "level", "GoalLevel" : 46}
         """
         gear = {}
+        self.slot
         gear_ids = [17,209,215,228,238,248,258,268,278,286]
         gear_names = ["boots","pickaxe","shovel","sword","bow","amulet","wallet","gloves","book","backpack"]
         for loc in self.checked_locations:
@@ -183,7 +189,9 @@ class ForagerContext(CommonContext):
                         gear[name] = gear.get(name,0) + 1
                         break
         itemmessage = {
-            "Gear" : gear
+            "Gear" : gear,
+            "Goal" : self.goal,
+            "GoalLevel" : self.goalLevel
         }
         return itemmessage
 

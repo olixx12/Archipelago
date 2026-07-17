@@ -87,7 +87,9 @@ class ForagerWorld(World):
         for item_type in self.item_class_sets.keys():
             if name in self.item_class_sets[item_type].keys():
                 cat_name: str = self.item_class_sets[item_type][name]
-                return ForagerItem(name, ItemClassification(str(item_type).lower()), self.item_name_to_id[name], self.player)
+                dClass = {"Progression" : ItemClassification.progression, "Useful" : ItemClassification.useful, "Filler" : ItemClassification.filler, "Trap" : ItemClassification.trap}
+                classification = dClass.get(item_type)
+                return ForagerItem(name, classification, self.item_name_to_id[name], self.player)
 
         raise Exception(f"Forager world is unable to find an item named: {name}")
 

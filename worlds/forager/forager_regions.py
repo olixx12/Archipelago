@@ -13,18 +13,19 @@ if TYPE_CHECKING:
 class LevelGroups(StrEnum):
     FirstGroup = "Levels 2-5"
     SecondGroup = "Levels 6-10"
-    ThirdGroup = "Levels 11-20"
-    FourthGroup = "Levels 21-30"
-    FifthGroup = "Levels 31-40"
-    SixthGroup = "Levels 41-50"
-    SeventhGroup = "Levels 51-60"
-    EighthGroup = "Levels 61-65"
+    ThirdGroup = "Levels 11-15"
+    FourthGroup = "Levels 16-20"
+    FifthGroup = "Levels 21-25"
+    SixthGroup = "Levels 26-30"
+    SeventhGroup = "Levels 31-35"
+    EighthGroup = "Levels 36-45"
+    NinthGroup = "Levels 46-65"
 
 
 class ForagerRegionData(NamedTuple):
     """Gives the flexibility to add multiple types of region requirements in the future, such as required gold, xp, etc."""
     parent_region: str
-    items_required: list[str] = None
+    items_required: dict[str, int] = None
 
 
 class ForagerLocation(Location):
@@ -35,28 +36,29 @@ class ForagerLocation(Location):
 
 # Defines the region and any access related requirements
 region_access: dict[str, ForagerRegionData] = {
-    "Royal Clothing": ForagerRegionData("Menu", ["Foraging", "Sewing", "Craftsmanship", "Prospecting"]),
-    "Steel": ForagerRegionData("Menu", ["Industry"]),
-    "Royal Steel": ForagerRegionData("Steel", ["Craftsmanship","Prospecting", "Deposit"]),
-    "Electronics": ForagerRegionData("Royal Steel", ["Manufacturing"]),
-    "Void Steel": ForagerRegionData("Electronics", ["Transmutation", "Spirituality"]),
-    "Cosmic Steel": ForagerRegionData("Void Steel", ["Astrology"]),
-    "Nuclear": ForagerRegionData("Void Steel", ["Physics"]),
+    "Royal Clothing": ForagerRegionData("Menu", {"Foraging" : 1, "Sewing" : 1, "Craftsmanship" : 1, "Prospecting" : 1, "Progressive Backpack" : 2}),
+    "Steel": ForagerRegionData("Menu", {"Industry" : 1, "Progressive Backpack" : 1}),
+    "Royal Steel": ForagerRegionData("Steel", {"Craftsmanship" : 1,"Prospecting" : 1, "Deposit" : 1, "Progressive Backpack" : 2}),
+    "Electronics": ForagerRegionData("Royal Steel", {"Manufacturing" : 1, "Progressive Backpack" : 3}),
+    "Void Steel": ForagerRegionData("Electronics", {"Transmutation" : 1, "Spirituality" : 1, "Storage" : 1}),
+    "Cosmic Steel": ForagerRegionData("Void Steel", {"Astrology" : 1}),
+    "Nuclear": ForagerRegionData("Void Steel", {"Physics" : 1}),
 
     "Grass": ForagerRegionData("Menu"),
-    "Desert": ForagerRegionData("Grass",),
-    "Winter": ForagerRegionData("Desert"),
-    "Graveyard": ForagerRegionData("Winter"),
-    "Fire": ForagerRegionData("Graveyard"),
+    "Desert": ForagerRegionData("Grass",{"desert" : 1}),
+    "Winter": ForagerRegionData("Desert",{"grave" : 1}),
+    "Graveyard": ForagerRegionData("Winter", {"winter" : 1}),
+    "Fire": ForagerRegionData("Graveyard", {"fire" : 1}),
 
     str(LevelGroups.FirstGroup): ForagerRegionData("Menu"),
-    str(LevelGroups.SecondGroup): ForagerRegionData(str(LevelGroups.FirstGroup), ["Industry"]),
-    str(LevelGroups.ThirdGroup): ForagerRegionData(str(LevelGroups.SecondGroup), ["Deposit"]),
-    str(LevelGroups.FourthGroup): ForagerRegionData(str(LevelGroups.ThirdGroup), ["Magic"]),
-    str(LevelGroups.FifthGroup): ForagerRegionData(str(LevelGroups.FourthGroup), ["Capitalism"]),
-    str(LevelGroups.SixthGroup): ForagerRegionData(str(LevelGroups.FifthGroup)),
-    str(LevelGroups.SeventhGroup): ForagerRegionData(str(LevelGroups.SixthGroup)),
-    str(LevelGroups.EighthGroup): ForagerRegionData(str(LevelGroups.SeventhGroup)),
+    str(LevelGroups.SecondGroup): ForagerRegionData(str(LevelGroups.FirstGroup), {"Progressive Pickaxe" : 1, "Magic" : 1}),
+    str(LevelGroups.ThirdGroup): ForagerRegionData(str(LevelGroups.SecondGroup), {"Industry" : 1, "Combat" : 1}),
+    str(LevelGroups.FourthGroup): ForagerRegionData(str(LevelGroups.ThirdGroup), {"Progressive Pickaxe" : 2, "Progressive Book" : 1}),
+    str(LevelGroups.FifthGroup): ForagerRegionData(str(LevelGroups.FourthGroup), {"Capitalism" : 1}),
+    str(LevelGroups.SixthGroup): ForagerRegionData(str(LevelGroups.FifthGroup), {"Progressive Book" : 3}),
+    str(LevelGroups.SeventhGroup): ForagerRegionData(str(LevelGroups.SixthGroup), {"Progressive Pickaxe" : 3}),
+    str(LevelGroups.EighthGroup): ForagerRegionData(str(LevelGroups.SeventhGroup), {"Optics" : 1}),
+    str(LevelGroups.NinthGroup): ForagerRegionData(str(LevelGroups.EighthGroup), {"Logistics" : 1})
 }
 
 def load_regions(world: "ForagerWorld"):
@@ -78,18 +80,20 @@ def create_locations(world: "ForagerWorld"):
         match i:
             case i if 5 < i <= 10:
                 group_to_use: str = str(LevelGroups.SecondGroup)
-            case i if 10 < i <= 20:
-                group_to_use: str = str(LevelGroups.SecondGroup)
-            case i if 20 < i <= 30:
+            case i if 10 < i <= 15:
+                group_to_use: str = str(LevelGroups.ThirdGroup)
+            case i if 15 < i <= 20:
                 group_to_use: str = str(LevelGroups.FourthGroup)
-            case i if 30 < i <= 40:
+            case i if 20 < i <= 25:
                 group_to_use: str = str(LevelGroups.FifthGroup)
-            case i if 40 < i <= 50:
+            case i if 25 < i <= 30:
                 group_to_use: str = str(LevelGroups.SixthGroup)
-            case i if 50 < i <= 60:
+            case i if 30 < i <= 35:
                 group_to_use: str = str(LevelGroups.SeventhGroup)
-            case i if 60 < i <= 65:
+            case i if 35 < i <= 45:
                 group_to_use: str = str(LevelGroups.EighthGroup)
+            case i if 45 < i <= 65:
+                group_to_use: str = str(LevelGroups.NinthGroup)
 
         level_region: Region = world.get_region(group_to_use)
         if i == world.required_level_count:
@@ -113,19 +117,3 @@ def create_locations(world: "ForagerWorld"):
 
             loc_region: Region = world.get_region(str(loc_data["region"]))
             loc_region.locations.append(ForagerLocation(world.player, loc_name, loc_data["id"], loc_region))
-
-    # Create some event items for ensuring logic handles upgrade items in order.
-    grass_reg: Region = world.get_region("Grass")
-    for tier_num in range(1, 9):
-        grass_reg.add_event(f"Industry Tier {tier_num}", f"Industry Upgrade {tier_num}",
-            location_type=ForagerLocation, item_type=ForagerItem)
-        grass_reg.add_event(f"Combat Tier {tier_num}", f"Combat Upgrade {tier_num}",
-                            location_type=ForagerLocation, item_type=ForagerItem)
-        grass_reg.add_event(f"Hunting Tier {tier_num}", f"Hunting Upgrade {tier_num}",
-                            location_type=ForagerLocation, item_type=ForagerItem)
-        grass_reg.add_event(f"Jewelry Tier {tier_num}", f"Jewelry Upgrade {tier_num}",
-                            location_type=ForagerLocation, item_type=ForagerItem)
-        grass_reg.add_event(f"Textiles Tier {tier_num}", f"Textiles Upgrade {tier_num}",
-                            location_type=ForagerLocation, item_type=ForagerItem)
-        grass_reg.add_event(f"Inscription Tier {tier_num}", f"Inscription Upgrade {tier_num}",
-                            location_type=ForagerLocation, item_type=ForagerItem)

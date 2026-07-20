@@ -7,14 +7,16 @@ from .forager_constants import GAME_NAME
 if TYPE_CHECKING:
     from worlds.forager import ForagerWorld
 
-LEATHER_ITEMS: list[str] = ["Foraging", "Sewing"]
-ROYAL_CLOTHING_ITEMS: list[str] = LEATHER_ITEMS + ["Craftsmanship", "Prospecting"]
-PLASTIC_ITEMS: list[str] = ROYAL_CLOTHING_ITEMS + ["Drilling", "Manufacturing"]
-ROYAL_STEEL_ITEMS: list[str] = ["Industry", "Craftsmanship", "Prospecting"]
-VOID_ITEMS: list[str] = ROYAL_STEEL_ITEMS + ["Summoning", "Combat"]
-VOID_STEEL_ITEMS: list[str] = VOID_ITEMS + ["Transmutation", "Spirituality"]
-COSMIC_STEEL_ITEMS: list[str] = VOID_ITEMS + ["Astrology"]
-NUCLEAR_ITEMS: list[str] = VOID_ITEMS + ["Physics"]
+LEATHER_ITEMS: dict[str,int] = {"Foraging" : 1, "Sewing" : 1, "Progressive Backpack" : 1}
+ROYAL_CLOTHING_ITEMS: dict[str,int] = LEATHER_ITEMS | {"Craftsmanship" : 1, "Prospecting" : 1, "Progressive Backpack" : 2} 
+PLASTIC_ITEMS: dict[str,int] = ROYAL_CLOTHING_ITEMS | {"Drilling" : 1, "Manufacturing" : 1, "Progressive Backpack" : 3}
+STEEL_ITEMS: dict[str,int] = {"Industry" : 1,"Progressive Backpack" : 1}
+ROYAL_STEEL_ITEMS: dict[str,int] = STEEL_ITEMS | {"Craftsmanship" : 1, "Prospecting" : 1, "Progressive Backpack" : 2}
+ELECTRONICS_ITEMS: dict[str,int] = ROYAL_STEEL_ITEMS | {"Manufacturing" : 1, "Progressive Backpack" : 3}
+VOID_ITEMS: dict[str,int] = ROYAL_STEEL_ITEMS | {"Summoning" : 1, "Combat" : 1, "Storage" : 1}
+VOID_STEEL_ITEMS: dict[str,int] = VOID_ITEMS | {"Transmutation" : 1, "Spirituality" : 1, "Progressive Sword" : 6}
+COSMIC_STEEL_ITEMS: dict[str,int] = VOID_STEEL_ITEMS | {"Astrology" : 1}
+NUCLEAR_ITEMS: dict[str,int] = COSMIC_STEEL_ITEMS | {"Physics" : 1}
 
 
 class ForagerItem(Item):

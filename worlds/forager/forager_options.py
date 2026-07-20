@@ -18,7 +18,7 @@ class RequiredLevel(Range):
     display_name = "Required Level"
     internal_name = "required_level"
     default = 65
-    range_start = 20
+    range_start = 40
     range_end = 65
 
 @dataclass

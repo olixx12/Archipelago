@@ -5,7 +5,8 @@ from BaseClasses import Entrance, CollectionState, Location
 
 from .forager_regions import ForagerRegionData, region_access, LevelGroups
 from .forager_items import (LEATHER_ITEMS, ROYAL_CLOTHING_ITEMS, PLASTIC_ITEMS, ROYAL_STEEL_ITEMS,
-    VOID_ITEMS, VOID_STEEL_ITEMS, COSMIC_STEEL_ITEMS, NUCLEAR_ITEMS, STEEL_ITEMS, ELECTRONICS_ITEMS)
+    VOID_ITEMS, VOID_STEEL_ITEMS, COSMIC_STEEL_ITEMS, NUCLEAR_ITEMS, STEEL_ITEMS, ELECTRONICS_ITEMS,
+    DIG_ARCHEOLOGY)
 from worlds.generic.Rules import add_rule, add_item_rule
 
 if TYPE_CHECKING:
@@ -74,6 +75,8 @@ def create_location_access_rules(world: "ForagerWorld"):
                 add_rule(tool_loc, (lambda state: can_make_cosmic_steel(state,world.player)))
             elif "Nuclear" == item_req:
                 add_rule(tool_loc, (lambda state: can_make_nuclear(state,world.player)))
+            elif "Dig" == item_req:
+                add_rule(tool_loc, (lambda state: can_dig_archeology(state,world.player)))
             else:
                 add_rule(tool_loc, (lambda state, loc_item=item_req: state.has(loc_item, world.player)))
 
@@ -152,6 +155,9 @@ def can_make_banks(state: CollectionState, player: int):
 
 def can_sell_items(state: CollectionState, player: int):
     return state.has("Capitalism",player) or (state.has("Trade",player) and can_make_leather(state,player))
+
+def can_dig_archeology(state: CollectionState, player: int):
+    return state.has_all_counts(DIG_ARCHEOLOGY, player)
 
 def can_reach_desert(state : CollectionState, player: int):
     return can_make_banks(state,player) or (can_sell_items(state,player) and state.has_any(["Colonization","Progressive Wallet"],player))

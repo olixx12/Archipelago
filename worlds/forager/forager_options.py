@@ -21,12 +21,20 @@ class RequiredLevel(Range):
     range_start = 40
     range_end = 65
 
+class EasierCraft(Toggle):
+    """
+    Make the main early game materials requires less ressources.
+    """
+    display_name = "Easier Crafting"
+    internal_name = "easier_craft"
+
 @dataclass
 class ForagerOptions(PerGameCommonOptions):
     game_mode: GameMode
     required_level: RequiredLevel
+    easier_craft: EasierCraft
 
 
 forager_option_groups: list[OptionGroup] = [
-    OptionGroup("Main Forager Options", [RequiredLevel])
+    OptionGroup("Main Forager Options", [RequiredLevel,EasierCraft])
 ]

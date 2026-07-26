@@ -1,10 +1,10 @@
 {
   "Tools": {
     "Progressive Pickaxe": { "id": 249, "count": 8, "classification": "Progression" },
-    "Progressive Shovel": { "id": 250, "count": 5, "classification": "Useful" },
+    "Progressive Shovel": { "id": 250, "count": 5, "classification": "Progression" },
     "Progressive Sword": { "id": 251, "count": 8, "classification": "Progression" },
     "Progressive Bow": { "id": 252, "count": 8, "classification": "Useful" },
-    "Progressive Amulet": { "id": 253, "count": 8, "classification": "Progression" },
+    "Progressive Amulet": { "id": 253, "count": 8, "classification": "Useful" },
     "Progressive Wallet": { "id": 254, "count": 8, "classification": "Progression" },
     "Progressive Gloves": { "id": 255, "count": 8, "classification": "Useful" },
     "Progressive Book": { "id": 256, "count": 8, "classification": "Progression" },

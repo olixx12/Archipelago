@@ -37,6 +37,7 @@ class ForagerContext(CommonContext):
         self.slot_data = {}
         self.goal : str = "level"
         self.goalLevel : int = 65
+        self.easierCraft : int = 0
 
     async def server_auth(self, password_requested: bool = False):
         if password_requested and not self.password:
@@ -88,6 +89,8 @@ class ForagerContext(CommonContext):
                 json["players"] = [me]
             self.slot_data = json["slot_data"]
             self.goalLevel = self.slot_data["required_level"]
+            if ("easier_craft" in self.slot_data and self.slot_data["easier_craft"]):
+                self.easierCraft = 1
             if DEBUG:
                 print(json)
             self.connected_msg = encode([json])
@@ -164,7 +167,9 @@ class ForagerContext(CommonContext):
                 skills[item[0] - 300] = 1
             elif(item[0] >= 249 and item[0] <= 265):
                 name = self.item_names["Forager"][item[0]]
-                name = name[12:].lower()
+                if("Progressive" in name):
+                    name = name[12:]
+                name = name.lower()
                 gear[name] = gear.get(name,0) + 1
         itemmessage = {
             "Gear" : gear,
@@ -191,7 +196,8 @@ class ForagerContext(CommonContext):
         itemmessage = {
             "Gear" : gear,
             "Goal" : self.goal,
-            "GoalLevel" : self.goalLevel
+            "GoalLevel" : self.goalLevel,
+            "EasierCraft" : self.easierCraft
         }
         return itemmessage
 

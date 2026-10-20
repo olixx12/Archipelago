@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from Options import PerGameCommonOptions, Toggle, Range, Choice, OptionGroup
+from Options import PerGameCommonOptions, DeathLink, Toggle, Range, Choice, OptionGroup
 
 
 class GameMode(Choice):
@@ -33,6 +33,7 @@ class ForagerOptions(PerGameCommonOptions):
     game_mode: GameMode
     required_level: RequiredLevel
     easier_craft: EasierCraft
+    death_link: DeathLink
 
 
 forager_option_groups: list[OptionGroup] = [

@@ -38,6 +38,9 @@ class ForagerContext(CommonContext):
         self.goal : str = "level"
         self.goalLevel : int = 65
         self.easierCraft : int = 0
+        self.received_death_link = False
+        self.death_link_player = ""
+        self.death_link_message = ""
 
     async def server_auth(self, password_requested: bool = False):
         if password_requested and not self.password:
@@ -91,6 +94,8 @@ class ForagerContext(CommonContext):
             self.goalLevel = self.slot_data["required_level"]
             if ("easier_craft" in self.slot_data and self.slot_data["easier_craft"]):
                 self.easierCraft = 1
+            if "death_link" in self.slot_data:
+                Utils.async_start(self.update_death_link(self.slot_data["death_link"]), name="Update Deathlink")
             if DEBUG:
                 print(json)
             self.connected_msg = encode([json])
@@ -153,6 +158,42 @@ class ForagerContext(CommonContext):
         """Handles POST at /Datapackage"""
         message = [{"cmd": "StatusUpdate", "status": ClientStatus.CLIENT_GOAL}]
         await self.send_msgs(message)
+    
+    async def deathHandler(self, request: aiohttp.web.Request) -> aiohttp.web.Response:
+        """Handles POST at /Death"""
+        await self.send_death(self.player_names[self.slot] + " failed to dodge.")
+        return aiohttp.web.json_response({"Time" : self.last_death_link, "Source" : self.player_names[self.slot]})
+    
+    async def deathlinkHandler(self, request: aiohttp.web.Request) -> aiohttp.web.Response:
+        """Handles GET at /Deathlink"""
+        response = self.build_deathlink_response()
+        return aiohttp.web.json_response(response)
+    
+    def on_deathlink(self, data: Utils.Dict[str, Utils.Any]) -> None:
+        super().on_deathlink(data)
+        text = data.get("cause", "")
+        if text:
+            message = text
+        else:
+            message = f"Received from {data['source']}"
+        self.death_link_message = message
+        self.death_link_player = data.get("source", "")
+        self.received_death_link = True
+    
+    def build_deathlink_response(self):
+        """
+        Expected return value to be like:
+        {"Time" : 1788741392, "Cause" : "Berserker was run over by a train.", "Source" : "Playername"}
+        """
+        if self.received_death_link:
+            message = {"Time" : self.last_death_link, 
+                       "Cause" : self.death_link_message,
+                       "Source" : self.death_link_player
+                      }
+            self.received_death_link = False
+        else:
+            message = {}
+        return message
     
     def build_item_response(self):
         """
